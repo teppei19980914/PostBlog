@@ -106,7 +106,7 @@ echo
 echo "[Step 4/4] Pytest"
 if [[ $COV_ENABLED -eq 1 ]]; then
     echo "Coverage: ENABLED"
-    if uv run pytest -v --cov=src/study_python --cov-report=term-missing --cov-report=html; then
+    if uv run pytest -v --cov=src/postblog --cov-report=term-missing --cov-report=html; then
         echo "  PASSED"
     else
         echo "  FAILED"

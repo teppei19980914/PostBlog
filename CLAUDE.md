@@ -4,7 +4,7 @@
 
 ## プロジェクト概要
 
-- **目的**: （プロジェクトの目的を記載する）
+- **目的**: 高速ブログ投稿支援アプリ - AIヒアリング→記事生成→マルチサービス投稿
 - **言語**: Python 3.12+
 - **パッケージ管理**: uv（推奨）または pip
 
@@ -15,7 +15,7 @@
 ├── CLAUDE.md           # このファイル（ClaudeCode用指示）
 ├── pyproject.toml      # プロジェクト設定・依存関係
 ├── src/                # ソースコード
-│   └── study_python/   # メインパッケージ
+│   └── postblog/       # メインパッケージ
 ├── tests/              # テストコード
 ├── docs/               # ドキュメント（必要に応じて）
 ├── scripts/            # ユーティリティスクリプト
@@ -68,7 +68,7 @@ from pathlib import Path
 import requests
 from pydantic import BaseModel
 
-from study_python.core import utils
+from postblog.core import utils
 ```
 
 ## 開発コマンド
@@ -90,7 +90,7 @@ uv run mypy src/
 uv run pytest
 
 # テスト（カバレッジ付き）
-uv run pytest --cov=src/study_python --cov-report=html
+uv run pytest --cov=src/postblog --cov-report=html
 ```
 
 ## コミットメッセージ規約
@@ -136,7 +136,7 @@ Closes #123
 ```python
 # tests/test_calculator.py
 import pytest
-from study_python.calculator import add
+from postblog.calculator import add
 
 def test_add_positive_numbers():
     assert add(1, 2) == 3
@@ -182,7 +182,7 @@ GUIコードは以下の構造で実装する：
 #### GUIロジック分離の実装例
 
 ```python
-# src/study_python/gui/calculator_logic.py
+# src/postblog/gui/calculator_logic.py
 # ロジック部分（テスト対象）
 
 class CalculatorLogic:
@@ -222,11 +222,11 @@ class CalculatorLogic:
 ```
 
 ```python
-# src/study_python/gui/calculator_gui.py
+# src/postblog/gui/calculator_gui.py
 # GUI部分（ロジックを呼び出すのみ）
 
 import tkinter as tk
-from study_python.gui.calculator_logic import CalculatorLogic
+from postblog.gui.calculator_logic import CalculatorLogic
 
 
 class CalculatorGUI:
@@ -265,7 +265,7 @@ class CalculatorGUI:
 ```python
 # tests/gui/test_calculator_logic.py
 import pytest
-from study_python.gui.calculator_logic import CalculatorLogic
+from postblog.gui.calculator_logic import CalculatorLogic
 
 
 class TestCalculatorLogic:
@@ -337,7 +337,7 @@ class TestCalculatorLogic:
 import pytest
 from pytestqt.qtbot import QtBot
 from PySide6.QtCore import Qt
-from study_python.gui.calculator_gui_qt import CalculatorWindow
+from postblog.gui.calculator_gui_qt import CalculatorWindow
 
 
 @pytest.fixture
@@ -403,7 +403,7 @@ tests/
 
 ```bash
 # カバレッジ付きテスト実行
-uv run pytest --cov=src/study_python --cov-report=html --cov-report=term-missing
+uv run pytest --cov=src/postblog --cov-report=html --cov-report=term-missing
 
 # カバレッジレポートの確認
 # htmlcov/index.html をブラウザで開く
@@ -502,7 +502,7 @@ if __name__ == "__main__":  # pragma: no cover
 ```python
 # tests/test_divide.py
 import pytest
-from study_python.math_utils import divide, safe_divide
+from postblog.math_utils import divide, safe_divide
 
 
 def test_divide_normal():
@@ -531,7 +531,7 @@ def test_safe_divide_by_zero():
 
 ```toml
 [tool.coverage.run]
-source = ["src/study_python"]
+source = ["src/postblog"]
 branch = true
 omit = [
     "*/__pycache__/*",
@@ -615,8 +615,8 @@ def process_data(data: dict) -> None:
 プロジェクト共通のログ設定モジュールを使用する：
 
 ```python
-# src/study_python/logging_config.py を使用
-from study_python.logging_config import setup_logging
+# src/postblog/logging_config.py を使用
+from postblog.logging_config import setup_logging
 
 # モジュール初期化時にログ設定を適用
 setup_logging()
@@ -645,7 +645,7 @@ logger = logging.getLogger(__name__)
 
 ```python
 import logging
-from study_python.logging_config import setup_logging
+from postblog.logging_config import setup_logging
 
 # ログ設定を適用
 setup_logging()
@@ -807,7 +807,7 @@ sequenceDiagram
 uv run pytest
 
 # カバレッジ付きテスト実行（推奨）
-uv run pytest --cov=src/study_python --cov-report=term-missing
+uv run pytest --cov=src/postblog --cov-report=term-missing
 
 # 特定のテストファイルのみ実行
 uv run pytest tests/test_specific.py -v

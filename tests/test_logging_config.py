@@ -4,9 +4,7 @@ import logging
 import tempfile
 from pathlib import Path
 
-import pytest
-
-from study_python.logging_config import LoggerMixin, get_logger, setup_logging
+from postblog.logging_config import LoggerMixin, get_logger, setup_logging
 
 
 def _close_all_handlers() -> None:

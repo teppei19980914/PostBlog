@@ -1,13 +1,17 @@
 """pytest の共通設定とフィクスチャ."""
 
+import tempfile
+from pathlib import Path
+
 import pytest
 
 
 @pytest.fixture
-def sample_numbers() -> tuple[int, int]:
-    """テスト用のサンプル数値ペアを提供するフィクスチャ。
+def tmp_dir() -> Path:
+    """テスト用の一時ディレクトリを提供するフィクスチャ。
 
     Returns:
-        テスト用の数値ペア (10, 5)。
+        一時ディレクトリのパス。
     """
-    return (10, 5)
+    with tempfile.TemporaryDirectory() as tmpdir:
+        yield Path(tmpdir)

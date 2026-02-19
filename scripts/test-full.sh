@@ -17,7 +17,7 @@ set -e
 cd "$(dirname "$0")/.."
 
 # デフォルト設定（カバレッジ有効）
-PYTEST_ARGS="-v --cov=src/study_python --cov-report=term-missing --cov-report=html"
+PYTEST_ARGS="-v --cov=src/postblog --cov-report=term-missing --cov-report=html"
 SKIP_INSTALL=0
 
 # 引数の解析

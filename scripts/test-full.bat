@@ -17,7 +17,7 @@ REM プロジェクトルートに移動
 cd /d "%~dp0.."
 
 REM デフォルト設定（カバレッジ有効）
-set PYTEST_ARGS=-v --cov=src/study_python --cov-report=term-missing --cov-report=html
+set PYTEST_ARGS=-v --cov=src/postblog --cov-report=term-missing --cov-report=html
 set SKIP_INSTALL=0
 
 REM 引数の解析

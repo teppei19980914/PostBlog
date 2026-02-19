@@ -104,7 +104,7 @@ REM Step 4: Tests
 echo [Step 4/4] Pytest
 if %COV_ENABLED%==1 (
     echo Coverage: ENABLED
-    uv run pytest -v --cov=src/study_python --cov-report=term-missing --cov-report=html
+    uv run pytest -v --cov=src/postblog --cov-report=term-missing --cov-report=html
 ) else (
     echo Coverage: DISABLED ^(use --cov to enable^)
     uv run pytest -v
