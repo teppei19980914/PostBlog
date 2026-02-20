@@ -12,8 +12,11 @@ from logging.handlers import RotatingFileHandler
 from pathlib import Path
 
 
+# プロジェクトルートディレクトリ
+_PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
+
 # ログディレクトリ
-LOG_DIR = Path.home() / ".postblog" / "logs"
+LOG_DIR = _PROJECT_ROOT / "logs"
 
 # デフォルト設定
 DEFAULT_LOG_LEVEL = logging.INFO

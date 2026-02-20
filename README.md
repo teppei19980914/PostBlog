@@ -193,9 +193,39 @@ uv run ruff check . && uv run ruff format --check . && uv run mypy src/ && uv ru
 
 合計 353テスト、カバレッジ 98%+（GUI層を除く）
 
+## データベース
+
+SQLiteデータベースを使用して下書きと投稿履歴を管理しています。
+
+- **保存先**: `~/.postblog/postblog.db`
+- **自動作成**: 初回接続時にファイルとディレクトリが自動作成されます
+
+### テーブル構成
+
+| テーブル名 | 用途 |
+|-----------|------|
+| `drafts` | 下書き記事の保存（タイトル、本文、タグ、ヒアリングデータ等） |
+| `publish_history` | 投稿履歴の記録（投稿先サービス、URL、ステータス等） |
+
+### テーブル初期化
+
+アプリケーション起動時に `Database.initialize()` が呼ばれ、テーブルが自動作成されます（`CREATE TABLE IF NOT EXISTS` を使用）。
+手動でのテーブル作成は不要です。
+
+```python
+from postblog.infrastructure.storage.database import Database
+
+database = Database()          # デフォルト: ~/.postblog/postblog.db
+database.initialize()          # スキーマ初期化（テーブル自動作成）
+conn = database.get_connection()  # 接続取得
+```
+
+> **Note**: テーブルが存在しないエラー（`no such table: drafts` 等）が発生する場合は、
+> `database.initialize()` が呼ばれていない可能性があります。
+
 ## ログ
 
-ログファイルの保存先: `~/.postblog/logs/`
+ログファイルの保存先: プロジェクトルート直下の `logs/` ディレクトリ
 
 - ファイル名: `app_YYYY-MM-DD.log`（日付ローテーション）
 - 保持期間: 30日間

@@ -19,11 +19,5 @@ if %ERRORLEVEL% NEQ 0 (
     exit /b 1
 )
 
-REM アプリケーション起動
-uv run postblog
-if %ERRORLEVEL% NEQ 0 (
-    echo.
-    echo [ERROR] アプリケーションの起動に失敗しました。
-    pause
-    exit /b 1
-)
+REM アプリケーションをバックグラウンドで起動し、cmdウィンドウを閉じる
+start "" /b uv run postblog

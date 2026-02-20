@@ -36,6 +36,7 @@ def main() -> None:  # pragma: no cover
     config_manager.load()
     credential_manager = CredentialManager()
     database = Database()
+    database.initialize()
     async_runner = AsyncRunner()
     async_runner.start()
 

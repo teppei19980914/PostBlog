@@ -57,10 +57,6 @@ class SettingsView(BaseView):
             if display:
                 self._api_key_entry.insert(0, display)
 
-        ctk.CTkButton(
-            api_frame, text="Save", width=60, command=self._save_api_key
-        ).pack(side="left", padx=(5, 0))
-
         # モデル選択
         model_frame = ctk.CTkFrame(scroll_frame, fg_color="transparent")
         model_frame.pack(fill="x", pady=4)
@@ -180,20 +176,6 @@ class SettingsView(BaseView):
             anchor="w",
         ).pack(anchor="w", pady=(15, 5))
 
-    def _save_api_key(self) -> None:
-        """APIキーを保存する。"""
-        settings_controller = self.navigation.context.get("settings_controller")
-        if settings_controller is None:
-            return
-
-        key = self._api_key_entry.get().strip()
-        if key:
-            try:
-                settings_controller.save_api_key(key)
-                logger.info("APIキーを保存しました")
-            except Exception:
-                logger.exception("APIキーの保存に失敗しました")
-
     def _on_save(self) -> None:
         """設定を保存する。"""
         settings_controller = self.navigation.context.get("settings_controller")
@@ -201,6 +183,12 @@ class SettingsView(BaseView):
             return
 
         try:
+            # APIキーの保存
+            key = self._api_key_entry.get().strip()
+            if key:
+                settings_controller.save_api_key(key)
+
+            # アプリケーション設定の保存
             settings_controller.update_app_settings(
                 model=self._model_var.get(),
                 theme=self._theme_var.get(),
